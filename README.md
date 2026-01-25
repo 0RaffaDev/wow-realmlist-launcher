@@ -34,6 +34,12 @@
 - **PyInstaller** (build del ejecutable)
 
 ---
+## ⬇️ Descarga
+
+👉 **[Descargar WoW Realmlist Launcher (Windows)](https://github.com/ORaffaDev/wow-realmlist-launcher/releases/latest)**
+
+> ⚠️ Nota: Windows puede mostrar una advertencia de seguridad al ejecutar el archivo.  
+> Seleccioná **“Más información” → “Ejecutar de todas formas”**.
 
 ## 📦 Uso
 
