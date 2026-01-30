@@ -1,118 +1,70 @@
-# 🧙‍♂️ WoW Realmlist Launcher
+# 🧙 WoW Launcher 3.3.5
 
-> Launcher fan-made para **World of Warcraft 3.3.5a (Wrath of the Lich King)**  
-> Permite cambiar el *realmlist* con un solo click y abrir el juego automáticamente.
-
----
-
-## 🚀 Características
-
-- 🌍 Cambio rápido de servidor (realmlist)
-- 🎮 Apertura automática de World of Warcraft
-- 📂 Configuración inicial guiada (selección de Wow.exe)
-- 💾 Guarda la configuración del usuario
-- 🧩 Soporte para múltiples servidores
-- 🎨 Interfaz simple, clara y moderna
-- 🖥️ Ejecutable standalone (no requiere Python)
+Launcher de World of Warcraft 3.3.5.
+Permite cambiar de servidor rápidamente y lanzar el juego desde una interfaz moderna y simple.
 
 ---
 
-## 🧩 Servidores soportados
+## ✨ Características
 
-- 🔥 Warmane  
-- ⚔️ UltimoWoW  
-- 🌎 WoW Patagonia  
-
-*(Se pueden agregar más fácilmente)*
-
----
-
-## 🛠️ Tecnologías usadas
-
-- **Python 3**
-- **Tkinter** (GUI)
-- **PyInstaller** (build del ejecutable)
-
----
-## ⬇️ Descarga
-
-👉 **[Descargar WoW Realmlist Launcher (Windows)](https://github.com/0RaffaDev/wow-realmlist-launcher/releases/latest)**
-
-> ⚠️ Nota: Windows puede mostrar una advertencia de seguridad al ejecutar el archivo.  
-> Seleccioná **“Más información” → “Ejecutar de todas formas”**.
-
-## 📦 Uso
-
-1. Abrir el launcher
-2. Configurar la ruta de `Wow.exe` (solo la primera vez)
-3. Seleccionar el servidor deseado
-4. ¡Listo! El juego se abre automáticamente 🚀
+- 🎮 Cambio rápido de servidor (realmlist)
+- 🚀 Inicio automático de World of Warcraft
+- 🧭 Interfaz estilo Blizzard Launcher
+- 🖼️ Pantalla de inicio con fondo animado
+- 📌 Secciones independientes:
+  - Inicio
+  - Novedades
+  - Addons *(en desarrollo)*
+  - Perfil *(en desarrollo)*
+  - About
+- ⚙️ Configuración persistente (no se pierde al cerrar)
+- 🇦🇷 Soporte para servidores privados 3.3.5
 
 ---
 
-## 🧪 Versiones
+## 📥 Descarga
 
-- **v2.0** → Launcher funcional base  
-- **v2.1** → Iconos + identidad visual  
-- **v2.2** → UI pulida / centrado / tamaño *(planeado)*  
-- **v2.3** → Mostrar realm actual *(en desarrollo)*  
-- **v2.4** → Guardar último realm  
-- **v3.0** → Multi-cliente / auto-update  
+
+👉[Releases → Descargá Última versión disponible]**(../../releases/latest)
+
+
+
+> El launcher se distribuye como archivo `.exe`.  
+> No requiere Python ni instalaciones adicionales.
 
 ---
 
-## 👨‍💻 Autor
+## ▶️ Uso
 
-**Developed by Gonza**  
-Proyecto personal creado con fines educativos y comunitarios.
+1. Abrí el launcher
+2. Click en **⚙️ Configurar WoW**
+3. Seleccioná tu `Wow.exe`
+4. Elegí el servidor
+5. ¡Jugá!
+
+---
+
+## 🚧 Estado del proyecto
+
+🟢 Proyecto activo y en desarrollo.
+
+Próximas mejoras planeadas:
+- Carrusel de novedades
+- Gestión de addons
+- Perfil de usuario
+- Mejoras visuales y animaciones
+
+---
+
+## 👤 Autor
+
+**GRaffaDev**
+
+Proyecto personal para aprendizaje y práctica de desarrollo de interfaces.
 
 ---
 
 ## ⚠️ Disclaimer
 
-Este es un proyecto **fan-made**.  
-World of Warcraft © Blizzard Entertainment.  
-Este proyecto no está afiliado ni respaldado por Blizzard.
-
----
-
----
-
-# 🌍 WoW Realmlist Launcher (English)
-
-> Fan-made launcher for **World of Warcraft 3.3.5a (Wrath of the Lich King)**  
-> Easily switch realmlist servers and launch the game with one click.
-
----
-
-## 🚀 Features
-
-- 🌍 One-click server switching
-- 🎮 Automatic WoW launch
-- 📂 Guided setup (select Wow.exe)
-- 💾 User configuration saved locally
-- 🧩 Multi-server support
-- 🎨 Clean and simple UI
-- 🖥️ Standalone executable (no Python required)
-
----
-
-## 🛠️ Built with
-
-- **Python 3**
-- **Tkinter**
-- **PyInstaller**
-
----
-
-## 👨‍💻 Author
-
-Developed by **GRaffaDev**
-
----
-
-## ⚠️ Disclaimer
-
-This is a **fan-made project**.  
-World of Warcraft is a trademark of Blizzard Entertainment.
-t. World of Warcraft is a trademark of Blizzard Entertainment.
+Este proyecto **no está afiliado a Blizzard Entertainment**.  
+World of Warcraft es una marca registrada de Blizzard.
