@@ -212,3 +212,196 @@ footer = tk.Label(
 canvas.create_window(WINDOW_WIDTH//2, WINDOW_HEIGHT-20, window=footer)
 
 root.mainloop()
+import tkinter as tk
+from tkinter import messagebox, filedialog
+import os
+import json
+import sys
+
+VERSION = "v3.0"
+AUTHOR = "GRaffaDev"
+CONFIG_FILE = "config.json"
+
+REALMS = {
+    "🔥 Warmane": "set realmlist logon.warmane.com",
+    "⚔️ UltimoWoW": "set realmlist logon.ultimowow.com",
+    "🌎 WowPatagonia": "set realmlist logon.wow-patagonia.win"
+}
+
+# ======================
+# ⚙️ CONFIG
+# ======================
+
+def load_config():
+    if os.path.exists(CONFIG_FILE):
+        with open(CONFIG_FILE, "r") as f:
+            return json.load(f)
+    return {}
+
+def save_config(data):
+    with open(CONFIG_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+
+config = load_config()
+
+# ======================
+# 🔧 FUNCIONES WOW
+# ======================
+
+def seleccionar_wow():
+    path = filedialog.askopenfilename(
+        title="Seleccioná Wow.exe",
+        filetypes=[("Wow.exe", "Wow.exe")]
+    )
+    if not path:
+        return
+
+    base_dir = os.path.dirname(path)
+    realmlist_path = os.path.join(base_dir, "Data", "esES", "realmlist.wtf")
+
+    if not os.path.exists(realmlist_path):
+        messagebox.showerror("Error", "No se encontró realmlist.wtf")
+        return
+
+    config["wow_path"] = path
+    config["realmlist_path"] = realmlist_path
+    save_config(config)
+    messagebox.showinfo("Listo", "WoW configurado correctamente")
+
+def cambiar_realm(nombre):
+    if "wow_path" not in config:
+        messagebox.showwarning("Configurar", "Primero configurá WoW")
+        return
+    try:
+        with open(config["realmlist_path"], "w") as f:
+            f.write(REALMS[nombre])
+        os.startfile(config["wow_path"])
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+
+# ======================
+# 🧠 UI STATE
+# ======================
+
+current_section = "Novedades"
+
+# ======================
+# 🖥️ UI
+# ======================
+
+root = tk.Tk()
+root.title("WoW Launcher")
+root.geometry("900x600")
+root.resizable(False, False)
+
+# ======================
+# 📦 LAYOUT
+# ======================
+
+topbar = tk.Frame(root, bg="#1f1f1f", height=50)
+topbar.pack(side="top", fill="x")
+
+body = tk.Frame(root, bg="#121212")
+body.pack(fill="both", expand=True)
+
+sidebar = tk.Frame(body, bg="#181818", width=200)
+sidebar.pack(side="left", fill="y")
+
+content = tk.Frame(body, bg="#0e0e0e")
+content.pack(side="right", fill="both", expand=True)
+
+# ======================
+# 🔁 CONTENT RENDER
+# ======================
+
+def render_content():
+    for widget in content.winfo_children():
+        widget.destroy()
+
+    title = tk.Label(
+        content,
+        text=current_section,
+        font=("Segoe UI", 18, "bold"),
+        fg="white",
+        bg="#0e0e0e"
+    )
+    title.pack(pady=30)
+
+    text = {
+        "Novedades": "📰 Noticias generales del launcher",
+        "Addons": "🧩 Addons instalados (próximamente)",
+        "Perfil": "👤 Perfil del usuario",
+        "About": f"WoW Launcher\n{VERSION}\nBy {AUTHOR}"
+    }
+
+    label = tk.Label(
+        content,
+        text=text.get(current_section, ""),
+        fg="#cccccc",
+        bg="#0e0e0e",
+        font=("Segoe UI", 12)
+    )
+    label.pack()
+
+# ======================
+# 🔝 TOPBAR
+# ======================
+
+def change_section(name):
+    global current_section
+    current_section = name
+    render_content()
+
+for sec in ["Novedades", "Addons", "Perfil", "About"]:
+    btn = tk.Button(
+        topbar,
+        text=sec,
+        bg="#1f1f1f",
+        fg="white",
+        bd=0,
+        font=("Segoe UI", 11, "bold"),
+        command=lambda s=sec: change_section(s)
+    )
+    btn.pack(side="left", padx=15, pady=10)
+
+# ======================
+# 🎮 SIDEBAR (SERVERS)
+# ======================
+
+tk.Label(
+    sidebar,
+    text="SERVERS",
+    fg="#aaaaaa",
+    bg="#181818",
+    font=("Segoe UI", 10, "bold")
+).pack(pady=(15, 10))
+
+btn_config = tk.Button(
+    sidebar,
+    text="⚙️ Configurar WoW",
+    command=seleccionar_wow,
+    bg="#252525",
+    fg="white",
+    bd=0,
+    height=2
+)
+btn_config.pack(fill="x", padx=10, pady=(0, 15))
+
+for nombre in REALMS:
+    btn = tk.Button(
+        sidebar,
+        text=nombre,
+        command=lambda n=nombre: cambiar_realm(n),
+        bg="#252525",
+        fg="white",
+        bd=0,
+        height=2
+    )
+    btn.pack(fill="x", padx=10, pady=5)
+
+# ======================
+# 🚀 START
+# ======================
+
+render_content()
+root.mainloop()
