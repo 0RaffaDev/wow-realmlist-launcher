@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox, filedialog
 import os
 import json
+from PIL import Image, ImageTk
+
 
 VERSION = "v3.1"
 AUTHOR = "GRaffaDev"
@@ -129,31 +131,64 @@ def render_content():
     for widget in content.winfo_children():
         widget.destroy()
 
+    # Canvas para fondo animado
+    canvas = tk.Canvas(content, bg="black", highlightthickness=0)
+    canvas.pack(fill="both", expand=True)
+    canvas.update()  # fuerza tamaño real
+
+
+    # Cargar imagen
+    bg_img = Image.open(r"C:\Users\Gonzalo\Desktop\script wow\fondo_wow.jpg")
+
+    # Tamaño grande tipo launcher
+    bg_img = bg_img.resize((1200, 800))
+    bg_photo = ImageTk.PhotoImage(bg_img)
+
+    bg = canvas.create_image(0, 0, anchor="nw", image=bg_photo)
+    canvas.image = bg_photo  # evita que desaparezca
+
+    # Movimiento lento
+    def mover():
+        canvas.move(bg, -0.2, 0)
+        x1, y1, x2, y2 = canvas.bbox(bg)
+        if x2 < canvas.winfo_width():
+            canvas.move(bg, canvas.winfo_width(), 0)
+        canvas.after(40, mover)
+
+    mover()
+
+    # Overlay oscuro (simula blur)
+    overlay = tk.Frame(canvas, bg="#0e0e0e")
+    canvas.create_window(
+    canvas.winfo_width() // 2,
+    canvas.winfo_height() // 2,
+    window=overlay,
+    width=canvas.winfo_width(),
+    height=canvas.winfo_height()
+)
+
+
+    # Título sección
     title = tk.Label(
-        content,
+        overlay,
         text=current_section,
         font=("Segoe UI", 22, "bold"),
         fg="white",
         bg="#0e0e0e"
     )
-    title.pack(pady=40)
+    title.pack(pady=(40, 10))
 
-    text = {
-        "Novedades": "📰 Noticias generales del launcher\n\n– Próximamente feeds reales",
-        "Addons": "🧩 Gestión de addons (en desarrollo)",
-        "Perfil": "👤 Perfil del usuario",
-        "About": f"WoW Launcher\n{VERSION}\nBy {AUTHOR}"
-    }
-
-    label = tk.Label(
-        content,
-        text=text.get(current_section, ""),
+    # Texto ejemplo
+    text = tk.Label(
+        overlay,
+        text="Bienvenido al launcher\nPróximamente novedades, addons y más",
         fg="#cccccc",
         bg="#0e0e0e",
         font=("Segoe UI", 13),
         justify="center"
     )
-    label.pack()
+    text.pack()
+
 
 # ======================
 # 🔝 TOPBAR
