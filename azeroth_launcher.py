@@ -3,6 +3,8 @@ from tkinter import filedialog, messagebox
 import os
 import json
 from PIL import Image, ImageTk
+import webbrowser
+
 
 # ======================
 # CONFIG
@@ -35,16 +37,33 @@ def center_window(win, w, h):
 # ======================
 
 def hover_on(e):
-    e.widget.config(bg="#333333", cursor="hand2")
+    e.widget.config(bg="#333333", cursor="hand2", font=("Segoe UI", 13, "bold"))
+    
 
 def hover_off(e, bg):
-    e.widget.config(bg=bg, cursor="")
+    e.widget.config(bg=bg, cursor="",font=("Segoe UI", 12, "bold"))
+    
 
 def hover_top_on(e):
-    e.widget.config(bg="#2b2b2b", cursor="hand2")
+    e.widget.config( 
+        fg = "#f5e6c8",
+        bg = "#2e2e2e",
+        relief = "raised",
+        cursor="hand2"
+    )
+    
 
 def hover_top_off(e):
-    e.widget.config(bg="#1f1f1f", cursor="")
+    
+    e.widget.config(fg="white", bg="#1f1f1f", cursor="",  )
+
+def hover_donate_on(e):
+    e.widget.config(bg="#2f2f2f", cursor="hand2", font=("Segoe UI", 11, "bold"))
+    
+
+def hover_donate_off(e):
+    e.widget.config(bg="#202020", cursor="", font=("Segoe UI", 10, "bold"))
+    
 
 # ======================
 # CONFIG FILE
@@ -97,6 +116,11 @@ def cambiar_realm(nombre):
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
+
+def open_donation():
+    webbrowser.open(DONATION_URL)
+
+DONATION_URL = "https://cafecito.app/graffadev"
 # ======================
 # UI
 # ======================
@@ -456,7 +480,9 @@ for sec in ["Inicio", "Novedades", "Addons", "Perfil", "About"]:
         fg="white",
         bd=0,
         font=("Segoe UI", 12, "bold"),
-        command=lambda s=sec: change_section(s)
+        command=lambda s=sec: change_section(s),
+        height=3,
+        padx=15
     )
     b.bind("<Enter>", hover_top_on)
     b.bind("<Leave>", hover_top_off)
@@ -471,7 +497,8 @@ tk.Label(
     text="SERVERS",
     fg="#aaaaaa",
     bg="#181818",
-    font=("Segoe UI", 11, "bold")
+    font=("Segoe UI", 11, "bold"),
+    height=3
 ).pack(pady=(20, 15))
 
 btn_cfg = tk.Button(
@@ -481,11 +508,12 @@ btn_cfg = tk.Button(
     bg="#252525",
     fg="white",
     bd=0,
-    height=2,
-    font=("Segoe UI", 11, "bold")
+    height=3,
+    font=("Segoe UI", 11, "bold"),
+    padx=15,
 )
-btn_cfg.bind("<Enter>", hover_on)
-btn_cfg.bind("<Leave>", lambda e: hover_off(e, "#252525"))
+btn_cfg.bind("<Enter>", hover_top_on)
+btn_cfg.bind("<Leave>", hover_top_off)
 btn_cfg.pack(fill="x", padx=15, pady=(0, 20))
 
 for nombre in REALMS:
@@ -504,6 +532,28 @@ for nombre in REALMS:
     b.bind("<Enter>", hover_on)
     b.bind("<Leave>", lambda e: hover_off(e, "#252525"))
     b.pack(fill="x", padx=15, pady=8)
+
+# ======================
+# DONATION BUTTON
+# ======================
+
+# ======================
+# DONATION BUTTON
+# ======================
+
+donate_btn = tk.Button(
+    sidebar,
+    text="☕ Apoyar el proyecto",
+    command=open_donation,
+    bg="#202020",
+    fg="#dddddd",
+    bd=0,
+    height=2,
+    font=("Segoe UI", 10, "bold")
+)
+donate_btn.bind("<Enter>", hover_donate_on)
+donate_btn.bind("<Leave>", hover_donate_off)
+donate_btn.pack(side="bottom", fill="x", padx=15, pady=20)
 
 # ======================
 # START
